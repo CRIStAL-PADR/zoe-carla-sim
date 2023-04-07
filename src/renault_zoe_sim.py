@@ -7,7 +7,7 @@ def main(args):
     actor_list = []
     
     # Connect to client
-    client = carla.Client('127.0.0.1', 2000)
+    client = carla.Client('192.168.0.25', 2000)
     client.set_timeout(20.0)
     
     # Load the world for the simulation and spawun point of the ego vehicle and its initial pose
@@ -90,9 +90,15 @@ if __name__ == '__main__':
     argparser.add_argument(
         '-w', '--world',
         metavar='WORLD_NAME',
-        default='Town07',
+        default='Town01',
         help='Name of the world to simulate (default: Town07)')
     args = argparser.parse_args()
+
+    #connect to the client and print available maps
+    client = carla.Client('192.168.0.25', 2000)
+    client.set_timeout(20.0)
+    print(client.get_available_maps())
+
     try:
         main(args)
     except KeyboardInterrupt:
